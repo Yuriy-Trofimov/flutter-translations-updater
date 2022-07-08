@@ -71,9 +71,7 @@ Example "lib/l10"''',
     (key, value) async {
       final result = await http.get(Uri.parse(value));
       if (result.statusCode == HttpStatus.ok && path != null) {
-        await File('${Directory.current}$path/app_$key.arb')
-            .create(recursive: true)
-            .then(
+        await File('$path/app_$key.arb').create(recursive: true).then(
           (file) {
             file.writeAsString(result.body);
           },
@@ -81,5 +79,4 @@ Example "lib/l10"''',
       }
     },
   );
-  exit(0);
 }
