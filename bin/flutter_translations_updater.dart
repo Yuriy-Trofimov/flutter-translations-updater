@@ -27,12 +27,21 @@ Example "en=URL" or "en_CA=URL" "en_FR=URL"
       help: '''
 Here you need to substitute the path to save the translation files.
 Example "lib/l10"''',
+    )
+    ..addFlag(
+      'path',
+      negatable: false,
+      help: '''Show current directory''',
     );
 
   final argResults = parser.parse(arguments);
 
   if (argResults.wasParsed('help')) {
     print(parser.usage);
+    exit(0);
+  }
+  if (argResults.wasParsed('help')) {
+    print(Directory.current);
     exit(0);
   }
   final languagesList = <String>[];
@@ -62,7 +71,9 @@ Example "lib/l10"''',
     (key, value) async {
       final result = await http.get(Uri.parse(value));
       if (result.statusCode == HttpStatus.ok && path != null) {
-        await File('$path/app_$key.arb').create(recursive: true).then(
+        await File('${Directory.current}$path/app_$key.arb')
+            .create(recursive: true)
+            .then(
           (file) {
             file.writeAsString(result.body);
           },
