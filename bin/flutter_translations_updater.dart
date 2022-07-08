@@ -40,7 +40,7 @@ Example "lib/l10"''',
     print(parser.usage);
     exit(0);
   }
-  if (argResults.wasParsed('help')) {
+  if (argResults.wasParsed('path')) {
     print(Directory.current);
     exit(0);
   }
