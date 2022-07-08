@@ -9,7 +9,7 @@ void main(List<String> arguments) async {
       'help',
       abbr: 'h',
       negatable: false,
-      help: 'Information about usage tool',
+      help: 'Help information about usage translation updater tool',
     )
     ..addSeparator('=== Parameters ===')
     ..addFlag(
@@ -17,7 +17,7 @@ void main(List<String> arguments) async {
       negatable: false,
       help: '''
 You need insert links for download translation files with language codes
-Example "en=URL" or "en_CA=URL" "en_FR=URL"
+Example "en=URL", "en=URL" "en_FR=URL"
 * It is also necessary to take into account that the main file for transfers must not have a country code.
 ''',
     )
@@ -26,12 +26,7 @@ Example "en=URL" or "en_CA=URL" "en_FR=URL"
       negatable: false,
       help: '''
 Here you need to substitute the path to save the translation files.
-Example "lib/l10"''',
-    )
-    ..addFlag(
-      'path',
-      negatable: false,
-      help: '''Show current directory''',
+Example "lib/l10n"''',
     );
 
   final argResults = parser.parse(arguments);
@@ -40,10 +35,7 @@ Example "lib/l10"''',
     print(parser.usage);
     exit(0);
   }
-  if (argResults.wasParsed('path')) {
-    print(Directory.current);
-    exit(0);
-  }
+
   final languagesList = <String>[];
   String? path;
 
